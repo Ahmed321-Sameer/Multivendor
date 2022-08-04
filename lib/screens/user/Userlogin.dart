@@ -6,8 +6,10 @@ import 'package:multivendor/screens/user/user-home.dart';
 
 class Userlogin extends StatelessWidget {
   Userlogin({Key? key}) : super(key: key);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController =
+      TextEditingController(text: "nabeel@gmail.com");
+  TextEditingController passwordController =
+      TextEditingController(text: "123456");
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {

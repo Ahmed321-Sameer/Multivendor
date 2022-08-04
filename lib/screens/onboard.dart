@@ -10,12 +10,29 @@ class Onbaord extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          color: Color(0xFF01579B),
+          // image: DecorationImage(
+          //   image: AssetImage("assets/onboard.webp"),
+          //   fit: BoxFit.fill,
+          // ),
+        ),
+        padding: const EdgeInsets.all(20),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            Spacer(),
+            const SizedBox(
+              height: 150,
+            ),
+            const Text(
+              "Weclcome",
+              style: TextStyle(
+                fontSize: 60,
+                color: Colors.white,
+              ),
+            ),
+            const Spacer(),
             Row(
               children: [
                 Expanded(
@@ -32,6 +49,7 @@ class Onbaord extends StatelessWidget {
                       child: Column(
                         children: const [
                           CircleAvatar(
+                              backgroundColor: Color(0xFFAED581),
                               radius: 40,
                               child: Icon(
                                 Icons.lock_open_outlined,
@@ -58,11 +76,11 @@ class Onbaord extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       // height: 30,
                       // width: 30,
-                      decoration: BoxDecoration(color: Colors.yellow[600]),
+                      decoration: BoxDecoration(color: Color(0xFFAED581)),
                       child: Column(
                         children: const [
                           CircleAvatar(
-                              // backgroundColor: Colors.green[300]!;
+                              backgroundColor: Colors.green,
                               radius: 40,
                               child: Icon(
                                 Icons.shop_2_outlined,

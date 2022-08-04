@@ -2,12 +2,15 @@ import 'dart:io';
 import 'dart:math';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:images_picker/images_picker.dart';
 import 'package:multivendor/screens/shopkeeper/helper.dart';
+
+import 'Seller_nav.dart';
 
 class Upload_Products extends StatefulWidget {
   const Upload_Products({Key? key}) : super(key: key);
@@ -20,11 +23,12 @@ class _Upload_ProductsState extends State<Upload_Products> {
   final itemname_con = TextEditingController();
   final item_description_con = TextEditingController();
   final phoneno_con = TextEditingController();
+  final price = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   var random = new Random();
   String url = "";
   File? imageaddress;
-
+  List<String> favorite = [];
   uploadimage() {
     String chlidref = random.nextInt(1000000).toString();
     FirebaseStorage.instance
@@ -92,6 +96,14 @@ class _Upload_ProductsState extends State<Upload_Products> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => SellerNavBar()));
+          },
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+        ),
         // backgroundColor: Colors.orange[900],
         centerTitle: true,
         title: const Text('Enter Details',
@@ -137,7 +149,10 @@ class _Upload_ProductsState extends State<Upload_Products> {
                         height: 12,
                       ),
                       email_field(
-                          itemname_con, "enter product name", "item_name"),
+                        itemname_con,
+                        "enter product name",
+                        "item_name",
+                      ),
                       const SizedBox(
                         height: 14,
                       ),
@@ -146,37 +161,47 @@ class _Upload_ProductsState extends State<Upload_Products> {
                       const SizedBox(
                         height: 14,
                       ),
-                      email_field(phoneno_con, "contact #", "phone"),
+                      email_field(price, "enter product price", "phone"),
                       const SizedBox(
-                        height: 20,
+                        height: 14,
                       ),
+                      email_field(phoneno_con, "enter number", "phone"),
                       const SizedBox(
-                        height: 34,
+                        height: 14,
                       ),
                       GestureDetector(
                         onTap: (() {
+                          print("object");
                           if (url != "") {
-                            final auction_item_obj = {
-                              "status": "show",
-                              "current bid": "0",
+                            final items = {
                               "image link": url.toString(),
                               "item name": itemname_con.text.toString().trim(),
                               "item description":
                                   item_description_con.text.toString().trim(),
-                              "seller contact number":
-                                  phoneno_con.text.toString().trim(),
+                              "phone": phoneno_con.text.toString().trim(),
+                              "price": price.text.toString().trim(),
+                              "faavorite": favorite,
                               "uploading date":
                                   "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
                               "uploading time":
                                   "${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}",
                             };
+
+                            // FirebaseFirestore.instance.collection("sellers").doc(FirebaseAuth.instance.currentUser!.uid).collection("seller items").add("bh")
                             FirebaseFirestore.instance
-                                .collection("auctionItems")
-                                .add(auction_item_obj)
+                                .collection("user")
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .collection("seller item")
+                                .add(items)
                                 .then((value) {
+                              FirebaseFirestore.instance
+                                  .collection("items")
+                                  .doc()
+                                  .set(items);
                               itemname_con.clear();
                               item_description_con.clear();
                               phoneno_con.clear();
+                              price.clear();
 
                               Fluttertoast.showToast(
                                   msg: "item is successfully uploaded",
@@ -208,7 +233,7 @@ class _Upload_ProductsState extends State<Upload_Products> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(color: Colors.black),
-                                color: Colors.orange),
+                                color: Colors.blue),
                             child: const Center(
                               child: Text(
                                 "upload",

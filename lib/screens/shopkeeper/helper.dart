@@ -12,7 +12,7 @@ Widget email_field(TextEditingController controller, hinttext, type) {
     controller: controller,
     //keyboardType: TextInputType.number,
     cursorColor: Colors.white,
-    style: TextStyle(color: Colors.white, fontSize: 15),
+    style: TextStyle(color: Colors.black, fontSize: 15),
     decoration: InputDecoration(
       filled: true,
       label: Text(hinttext.toString(),

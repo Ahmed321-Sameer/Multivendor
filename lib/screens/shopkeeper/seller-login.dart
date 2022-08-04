@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:multivendor/screens/shopkeeper/Seller_nav.dart';
 import 'package:multivendor/screens/shopkeeper/seller_detail.dart';
+import 'package:multivendor/screens/shopkeeper/seller_home.dart';
 import 'package:multivendor/screens/user/User-register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:multivendor/screens/user/bottomnavigation.dart';
@@ -8,7 +10,7 @@ import 'package:multivendor/screens/user/user-home.dart';
 class Seller_login extends StatelessWidget {
   Seller_login({Key? key}) : super(key: key);
   TextEditingController nameController =
-      TextEditingController(text: "ahmed@gmail.com");
+      TextEditingController(text: "Ab@gmail.com");
   TextEditingController passwordController =
       TextEditingController(text: "123456");
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -44,7 +46,7 @@ class Seller_login extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(10),
                   child: const Text(
-                    'Sign To Seller Account',
+                    'Sign in To Seller Account',
                     style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
@@ -94,7 +96,7 @@ class Seller_login extends StatelessWidget {
                           .then((value) => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Seller_Detail())));
+                                  builder: (context) => SellerNavBar())));
                       // Navigator.pushReplacement(context,
                       //     MaterialPageRoute(builder: (context) => Userhome()));
                     },

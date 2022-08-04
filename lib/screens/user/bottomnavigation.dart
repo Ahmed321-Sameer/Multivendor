@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:multivendor/screens/user/favoriteItem.dart';
 import 'package:multivendor/screens/user/user-home.dart';
+import 'package:multivendor/screens/user/viewcart.dart';
 
 class Bottomsheet extends StatefulWidget {
   @override
@@ -10,15 +12,14 @@ class _BottomsheetState extends State<Bottomsheet> {
   int currentIndex = 0;
   final screens = [
     Userhome(),
-    // AddItem(),
-    // Cart(),
-    // Signout(),
+    FavoriteItems(),
+    viewcart(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: WillPopScope(
         onWillPop: () {
           return Future.value(false);
@@ -35,8 +36,8 @@ class _BottomsheetState extends State<Bottomsheet> {
 
           bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.red,
-              unselectedItemColor: Colors.red[200],
+              selectedItemColor: Colors.grey,
+              unselectedItemColor: Colors.grey[300],
               selectedFontSize: 18,
               unselectedFontSize: 15,
               showSelectedLabels: true,
@@ -48,11 +49,15 @@ class _BottomsheetState extends State<Bottomsheet> {
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.add),
-                  label: "Add Product",
+                  icon: Icon(
+                    Icons.favorite_outline,
+                  ),
+                  label: "Favourite",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(
+                    Icons.shopping_cart,
+                  ),
                   label: "Cart",
                 ),
                 // BottomNavigationBarItem(

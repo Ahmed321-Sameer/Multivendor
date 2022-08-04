@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multivendor/screens/shopkeeper/seller-login.dart';
 import 'package:multivendor/screens/shopkeeper/seller_detail.dart';
 import 'package:multivendor/screens/user/Userlogin.dart';
 import 'package:multivendor/screens/user/user-home.dart';
@@ -99,7 +100,7 @@ class Seller_Register extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(context,
+                      Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Userlogin()));
                     },
                     child: Container(
@@ -114,26 +115,29 @@ class Seller_Register extends StatelessWidget {
                                   .createUserWithEmailAndPassword(
                                       email: emailController.text.trim(),
                                       password: passwordController.text.trim())
-                                  .then((value) {
-                                FirebaseFirestore.instance
-                                    .collection("user")
-                                    .doc(value.user!.uid)
-                                    .set({
-                                  "name": nameController.text.trim(),
-                                  "email": emailController.text.trim(),
-                                  "id": value.user!.uid,
-                                  "busines-name": "none",
-                                  "store_type": "none",
-                                  "address": "none",
-                                  "city": "none"
-                                }).then(
-                                  (value) => Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Seller_Detail()),
-                                  ),
-                                );
-                              });
+                                  .then(
+                                (value) {
+                                  FirebaseFirestore.instance
+                                      .collection("user")
+                                      .doc(value.user!.uid)
+                                      .set({
+                                    "name": nameController.text.trim(),
+                                    "email": emailController.text.trim(),
+                                    "id": value.user!.uid,
+                                    "busines-name": "none",
+                                    "store_type": "none",
+                                    "address": "none",
+                                    "city": "none"
+                                  }).then(
+                                    (value) => Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Seller_Detail()),
+                                    ),
+                                  );
+                                },
+                              );
                             }
 
                             // print(nameController.text);
@@ -158,7 +162,7 @@ class Seller_Register extends StatelessWidget {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Userlogin()));
+                                  builder: (context) => Seller_login()));
                         },
                       )
                     ],

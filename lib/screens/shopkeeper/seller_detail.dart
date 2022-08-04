@@ -34,30 +34,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     'Grosery',
     'Grament',
     'hardware',
-    'hardware',
-    'hardware',
-    'hardware',
-    'hardware',
-    'hardware',
-    'hardware',
-    'hardware',
     'Software',
   ];
   String store_type = "";
   int? _radioValue = 0;
 
-  void _handleRadioValueChange(int? value) {
-    setState(() {
-      _radioValue = value;
+  // void _handleRadioValueChange(int? value) {
+  //   setState(() {
+  //     _radioValue = value;
 
-      switch (_radioValue) {
-        case 0:
-          break;
-        case 1:
-          break;
-      }
-    });
-  }
+  //     switch (_radioValue) {
+  //       case 0:
+  //         break;
+  //       case 1:
+  //         break;
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +125,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           Container(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: TextField(
-              obscureText: true,
               controller: addressController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -145,7 +137,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           Container(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: TextField(
-              obscureText: true,
               controller: cityController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -204,6 +195,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           //     ),
           //   ],
           // ),
+          const SizedBox(
+            height: 10,
+          ),
           Container(
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),

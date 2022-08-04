@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multivendor/screens/onboard.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:multivendor/screens/user/user-home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Onbaord(),
+      home: Onbaord(),
     );
   }
 }
