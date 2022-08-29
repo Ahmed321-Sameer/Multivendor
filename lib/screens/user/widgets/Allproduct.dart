@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../product-detail.dart';
+import '../User home /product-detail.dart';
 
 class AllProduct extends StatelessWidget {
   const AllProduct({Key? key}) : super(key: key);
@@ -10,9 +10,10 @@ class AllProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('items').snapshots(),
+        stream: FirebaseFirestore.instance.collection('All items').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (!snapshot.hasData) return const CircularProgressIndicator();
+          if (!snapshot.hasData)
+            return Center(child: CircularProgressIndicator());
 
           return Container(
             margin: const EdgeInsets.all(12),
@@ -27,6 +28,7 @@ class AllProduct extends StatelessWidget {
                 DocumentSnapshot curdoc = snapshot.data!.docs[index];
                 return GestureDetector(
                   onTap: () {
+                    print("object");
                     List favrt = [];
                     favrt = curdoc.get("faavorite");
                     Navigator.push(
@@ -37,10 +39,13 @@ class AllProduct extends StatelessWidget {
                                   primg: curdoc["image link"],
                                   prname: curdoc["item name"],
                                   price: curdoc["price"],
-                                  description: curdoc["item description"],
+                                  promo: curdoc["promo code"],
+                                  business_name: curdoc["business_name"],
                                   fvrt: favrt,
                                   uid: curdoc.id,
-                                  // primg: curdoc["image link"],
+                                  selleruid: curdoc["seller_id"],
+                                  seller_number: curdoc["seller_number"],
+                                  prquantity: curdoc["quantity"],
                                   // prname: curdoc["item name"],
                                   // price: curdoc["price"],
                                   // description: curdoc["item description"],

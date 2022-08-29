@@ -4,7 +4,12 @@ class cart {
   static List<String> Product_name = [];
   static List<String> product_price = [];
   static List<String> product_image = [];
+  static List<String> promo_code = [];
+  static List<String> selleruid = [];
   static List<int> quantity = [];
+  static List<int> prquantity = [];
+  static List<String> marketbrands = [];
+  static List<String> brandslisttoupload = [];
 
   static Future<bool> checkproduct(
     productimg,

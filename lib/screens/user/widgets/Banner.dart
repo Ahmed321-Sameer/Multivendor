@@ -34,8 +34,8 @@ class Baanner extends StatelessWidget {
               ),
               items: carouselData
                   .map(
-                    (e) => Image(
-                      image: AssetImage(e),
+                    (value) => Image(
+                      image: AssetImage(value),
                       fit: BoxFit.cover,
                     ),
                   )
