@@ -402,6 +402,8 @@ class _viewcartState extends State<viewcart> {
               "total price": totalprice.toString(),
               "busines_name": cart.brandslisttoupload,
               "consumer_name": consumer,
+              "seller_number": widget.seller_number,
+              "consumer_phone": numbercontroller.text.toString(),
               "id": FirebaseAuth.instance.currentUser!.uid
             }).then((value) async {
               print("now for loop is about to laounch");

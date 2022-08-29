@@ -18,7 +18,7 @@ class Dailyreport extends StatelessWidget {
                   .collection("Order history")
                   .where("seller_id",
                       isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                  .orderBy("day")
+                  // .orderBy("day")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
