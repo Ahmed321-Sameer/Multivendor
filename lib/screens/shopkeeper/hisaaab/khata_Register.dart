@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -54,79 +53,6 @@ class _Khata_RegisterState extends State<Khata_Register> {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(5),
-                            topLeft: Radius.circular(5))),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Rs " + total.toString(),
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          'Payable',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(5),
-                            topRight: Radius.circular(5))),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Rs. 0',
-                          style: TextStyle(
-                            color: Colors.green[400],
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          'Receivable',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
           Container(
               child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
@@ -171,18 +97,19 @@ class _Khata_RegisterState extends State<Khata_Register> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Column(children: [
-                              Row(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Expanded(
-                                      child: Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          child: Text(
-                                              "" + (index + 1).toString()))),
-                                  Expanded(
-                                    flex: 2,
+                                  Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Text("" + (index + 1).toString())),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Container(
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Row(
                                             children: [
@@ -338,14 +265,12 @@ class _Khata_RegisterState extends State<Khata_Register> {
                                         ],
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [],
-                              ),
-                            ]),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [],
+                                  ),
+                                ]),
                           )));
                 },
               );

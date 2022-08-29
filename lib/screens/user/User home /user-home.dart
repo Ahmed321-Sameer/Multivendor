@@ -17,6 +17,17 @@ class Userhome extends StatefulWidget {
   _UserhomeState createState() => _UserhomeState();
 }
 
+// Future<QuerySnapshot>? postdocs;
+// searchbar(String enteredtext) {
+//   postdocs = FirebaseFirestore.instance
+//       .collection("All items")
+//       .where("item name", isGreaterThanOrEqualTo: enteredtext)
+//       .get();
+//       setState((){
+// postdocs;
+//       });
+// }
+
 class _UserhomeState extends State<Userhome> {
   @override
   Widget build(BuildContext context) {
@@ -94,6 +105,10 @@ class _UserhomeState extends State<Userhome> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
               ),
+              // TextField(
+              //   onChanged: (value){},
+              //   decoration: InputDecoration( ),
+              // ),
               //banner call
               Baanner(),
               //baaanner caall

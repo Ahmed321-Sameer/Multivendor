@@ -261,7 +261,8 @@ class _viewcartState extends State<viewcart> {
                                       children: [
                                         IconButton(
                                             onPressed: () {
-                                              if (cart.prquantity[index] >
+                                              if (int.parse(
+                                                      cart.prquantity[index]) >
                                                   cart.quantity[index]) {
                                                 setState(() {
                                                   cart.quantity[index]++;

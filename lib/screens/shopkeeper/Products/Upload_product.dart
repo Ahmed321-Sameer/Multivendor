@@ -313,7 +313,7 @@ class _Upload_ProductsState extends State<Upload_Products> {
                                 "promo code":
                                     random.nextInt(1000000).toString().trim(),
                                 "price": price.text.toString().trim(),
-                                "quantity": quantity.text.trim(),
+                                "quantity": quantity.text.toString().trim(),
                                 "faavorite": favorite,
                                 "seller_id": FirebaseAuth
                                     .instance.currentUser!.uid

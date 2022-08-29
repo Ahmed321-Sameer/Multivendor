@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multivendor/screens/shopkeeper/Products/Upload_product.dart';
 import 'package:multivendor/screens/shopkeeper/Home/seller_home.dart';
+import 'package:multivendor/screens/shopkeeper/reports/reportbar.dart';
 import 'package:multivendor/screens/user/User%20home%20/user-home.dart';
 
 import '../Products/My-products.dart';
@@ -12,16 +13,12 @@ class SellerNavBar extends StatefulWidget {
 
 class _BottomsheetState extends State<SellerNavBar> {
   int currentIndex = 0;
-  final screens = [
-    Seller_Home(),
-    My_products(),
-    // Upload_Products(),
-  ];
+  final screens = [Seller_Home(), My_products(), reportbar()];
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         body: screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -42,10 +39,10 @@ class _BottomsheetState extends State<SellerNavBar> {
                 icon: Icon(Icons.back_hand_sharp),
                 label: "My product",
               ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.add),
-              //   label: "Upload",
-              // ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.add),
+                label: "Report",
+              ),
             ]),
       ),
     );

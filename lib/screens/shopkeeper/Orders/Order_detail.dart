@@ -126,77 +126,95 @@ class _Order_DetailState extends State<Order_Detail> {
         },
         showCloseIcon: true,
         btnOkOnPress: () async {
-          await FirebaseFirestore.instance
-              .collection("seller")
-              .doc(productdata.get("seller uid"))
-              .collection("seller item")
-              .where("promo code", isEqualTo: productdata["product_code"])
+          FirebaseFirestore.instance
+              .collection("All items")
+              .where("seller_id",
+                  isEqualTo: FirebaseAuth.instance.currentUser!.uid)
               .get()
               .then((value) {
             value.docs.forEach((element) {
-              print("here is element naame" + element.get("item name"));
               element.reference.update({
                 "quantity": (int.parse(element.get("quantity")) -
                         int.parse(productdata["quantity"]))
                     .toString()
               });
             });
-          }).then((value) async {
-            await FirebaseFirestore.instance
-                .collection("order")
-                .doc(widget.snapshot_id)
+          }).then((value) {
+            FirebaseFirestore.instance
+                .collection("seller")
+                .doc(productdata.get("seller uid"))
+                .collection("seller item")
+                .where("promo code", isEqualTo: productdata["product_code"])
                 .get()
-                .then((value) async {
-              await value.reference
-                  .collection("order list")
-                  .where("market name", isEqualTo: widget.busines_name)
+                .then((value) {
+              value.docs.forEach((element) {
+                print("here is element name" + element.get("item name"));
+                element.reference.update({
+                  "quantity": (int.parse(element.get("quantity")) -
+                          int.parse(productdata["quantity"]))
+                      .toString()
+                });
+              });
+            }).then((value) async {
+              await FirebaseFirestore.instance
+                  .collection("order")
+                  .doc(widget.snapshot_id)
                   .get()
-                  .then((chlidvalue) async {
-                if (chlidvalue.size - 1 >= 1) {
-                  print("company product still exisist ");
-                } else {
-                  await value.reference.update({
-                    "busines_name":
-                        FieldValue.arrayRemove([widget.busines_name])
-                  });
-                }
-              }).then((value) async {
-                await FirebaseFirestore.instance
-                    .collection("Order history")
-                    .add({
-                  "order status": "accepted",
-                  "seller_number": productdata["seller_number"],
-                  "promo_code": productdata['product_code'],
-                  "address": productdata['address'],
-                  "consumer_phone": productdata["consumer_phone"],
-                  "quantity": productdata['quantity'],
-                  "product_name": productdata['product_name'],
-                  "product_price": productdata["product_price"],
-                  "product_image": productdata['product_image'],
-                  "consumer_name": productdata['consumer_name'],
-                  "busines_name": productdata['market name'],
-                  "user_id": productdata['id'],
-                  "seller_id": FirebaseAuth.instance.currentUser!.uid.toString()
+                  .then((value) async {
+                await value.reference
+                    .collection("order list")
+                    .where("market name", isEqualTo: widget.busines_name)
+                    .get()
+                    .then((chlidvalue) async {
+                  if (chlidvalue.size - 1 >= 1) {
+                    print("company product still exisist ");
+                  } else {
+                    await value.reference.update({
+                      "busines_name":
+                          FieldValue.arrayRemove([widget.busines_name])
+                    });
+                  }
                 }).then((value) async {
                   await FirebaseFirestore.instance
-                      .collection("order")
-                      .doc(widget.snapshot_id)
-                      .collection("order list")
-                      .doc(productdata.id)
-                      .delete();
-                }).then((value) async {
-                  await FirebaseFirestore.instance
-                      .collection("order")
-                      .doc(widget.snapshot_id)
-                      .collection("order list")
-                      .get()
-                      .then((value) async {
-                    if (value.size == 0) {
-                      await FirebaseFirestore.instance
-                          .collection("order")
-                          .doc(widget.snapshot_id)
-                          .delete();
-                    }
+                      .collection("Order history")
+                      .add({
+                    "order status": "accepted",
+                    "day": "${DateTime.now().day}",
+                    "month": "${DateTime.now().month}",
+                    "seller_number": productdata["seller_number"],
+                    "promo_code": productdata['product_code'],
+                    "address": productdata['address'],
+                    "consumer_phone": productdata["consumer_phone"],
+                    "quantity": productdata['quantity'],
+                    "product_name": productdata['product_name'],
+                    "product_price": productdata["product_price"],
+                    "product_image": productdata['product_image'],
+                    "consumer_name": productdata['consumer_name'],
+                    "busines_name": productdata['market name'],
+                    "user_id": productdata['id'],
+                    "seller_id":
+                        FirebaseAuth.instance.currentUser!.uid.toString()
+                  }).then((value) async {
+                    await FirebaseFirestore.instance
+                        .collection("order")
+                        .doc(widget.snapshot_id)
+                        .collection("order list")
+                        .doc(productdata.id)
+                        .delete();
+                  }).then((value) async {
+                    await FirebaseFirestore.instance
+                        .collection("order")
+                        .doc(widget.snapshot_id)
+                        .collection("order list")
+                        .get()
+                        .then((value) async {
+                      if (value.size == 0) {
+                        await FirebaseFirestore.instance
+                            .collection("order")
+                            .doc(widget.snapshot_id)
+                            .delete();
+                      }
+                    });
                   });
                 });
               });

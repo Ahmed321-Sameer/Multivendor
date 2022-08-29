@@ -16,7 +16,7 @@ class ProductPage extends StatefulWidget {
   List fvrt;
   String uid;
   String seller_number;
-  int prquantity;
+  String prquantity;
   ProductPage(
       {required this.index,
       required this.seller_number,

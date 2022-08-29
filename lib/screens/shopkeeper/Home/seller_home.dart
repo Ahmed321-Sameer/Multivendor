@@ -136,13 +136,13 @@ class _Seller_HomeState extends State<Seller_Home> {
             color: Colors.white,
           ),
         ),
-        actions: const [
-          Icon(
-            Icons.notifications,
-            size: 30,
-            color: Colors.white,
-          ),
-        ],
+        // actions: const [
+        //   Icon(
+        //     Icons.notifications,
+        //     size: 30,
+        //     color: Colors.white,
+        //   ),
+        // ],
         backgroundColor: Colors.blue[900],
         elevation: 0,
       ),
