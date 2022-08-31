@@ -240,30 +240,35 @@ class _Update_ProductState extends State<Update_Product> {
                       ),
                       GestureDetector(
                         onTap: (() {
-                          print("object");
-                          if (url == "") {
-                            FirebaseFirestore.instance
-                                .collection("seller")
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .collection("seller item")
-                                .doc(widget.docid)
-                                .update({
-                              "item name": itemname_con.text.toString().trim(),
-                              "price": price.text.toString().trim(),
-                              "quantity": price.text.toString().trim(),
-                            });
-                          } else {
-                            FirebaseFirestore.instance
-                                .collection("seller")
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .collection("seller item")
-                                .doc(widget.docid)
-                                .update({
-                              "image link": url.toString(),
-                              "item name": itemname_con.text.toString().trim(),
-                              "price": quantity.text.toString().trim(),
-                            });
+                          if (_formkey.currentState!.validate()) {
+                            if (url == "") {
+                              FirebaseFirestore.instance
+                                  .collection("seller")
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .collection("seller item")
+                                  .doc(widget.docid)
+                                  .update({
+                                "image link": url.toString(),
+                                "item name":
+                                    itemname_con.text.toString().trim(),
+                                "price": price.text.toString().trim(),
+                                "quantity": price.text.toString().trim(),
+                              });
+                            } else {
+                              FirebaseFirestore.instance
+                                  .collection("seller")
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .collection("seller item")
+                                  .doc(widget.docid)
+                                  .update({
+                                "image link": url.toString(),
+                                "item name":
+                                    itemname_con.text.toString().trim(),
+                                "price": quantity.text.toString().trim(),
+                              });
+                            }
                           }
+                          print("object");
 
                           // FirebaseFirestore.instance.collection("sellers").doc(FirebaseAuth.instance.currentUser!.uid).collection("seller items").add("bh")
 
